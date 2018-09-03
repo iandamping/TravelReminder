@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.jun.travelreminder">
+    <!--tambahkan permision vibrate-->
+    <!--didalam activity tambahkan singletop-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity" />
+
+        <activity
+            android:name=".fitur.input.InputActivity"
+            android:label="Input Barang" />
+
+        <activity android:name=".fitur.input.InputDetail" />
+
+        <service
+            android:name=".helper.services.ReminderServices"
+            android:exported="false" />
+        <!--<service android:name=".helper.SyncHelper.WeatherIntentService" android:exported="false"/>-->
+        <service
+            android:name=".helper.Notification.NotificationJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
+        <!--<service-->
+        <!--android:name=".helper.DateChecker.FirebaseDateChecker"-->
+        <!--android:exported="false">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+
+        <!--<service-->
+        <!--android:name=".helper.SyncHelper.FirebaseWeatherSync"-->
+        <!--android:exported="false">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+    </application>
+
+</manifest>

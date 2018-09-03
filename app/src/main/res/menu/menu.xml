@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_pink_24dp"
+        android:title="home" />
+
+
+    <item
+        android:id="@+id/navigation_input"
+        android:icon="@drawable/ic_add_circle_outline_pink_24dp"
+        android:title="input" />
+
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/ic_news_24dp"
+        android:title="profile" />
+</menu>

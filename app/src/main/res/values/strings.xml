@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Travel Reminder</string>
+    <string name="Input_Barang"> Input Barang</string>
+    <string name="Input_Tujuan">Input Tujuan : </string>
+    <string name="Input_Jumlah">Input Jumlah : </string>
+    <string name="Jenis_Kelamin">Jenis Kelamin : </string>
+    <string name="Title">Isi Biodata Diri</string>
+
+    <string name="pria">Pria</string>
+    <string name="wanita">Wanita</string>
+    <string name="unknown">Unknown</string>
+
+
+    <string name="Input_Nama">Lanjuuuut</string>
+    <string name="Pesan_Kesalahan">Kota yang anda cari tidak ada, coba melakukan pencarian menggunakan bahasa inggris</string>
+    <string name="oreo_notif">Notification</string>
+    <string name="oreo_notif_tittle">Hai, ini sudah waktunya kamu pulang</string>
+    <string name="oreo_notif_body">Jangan lupa ya, ini barang barangmu!</string>
+    <string name="blogspot_key_link">AIzaSyBzhmwBuFp_4CH4XWxlMjEdg3kMk_dfGPk</string>
+
+
+</resources>
