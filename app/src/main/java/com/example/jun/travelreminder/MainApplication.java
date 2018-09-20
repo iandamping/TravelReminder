@@ -5,19 +5,24 @@ import android.content.Context;
 
 import com.example.jun.travelreminder.Databasenya.ROOM.DatabaseNya;
 
-import io.reactivex.disposables.Disposable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 public class MainApplication extends Application {
-    public static Disposable disposable;
+    public static final String DATE_FORMAT = "dd/MM/yyy";
+    public static CompositeDisposable disposable;
     public static Context CONTEXT = null;
     public static DatabaseNya mDatabase;
+    public static DateFormat dateFormat;
 
     public static Context get() {
         return (MainApplication) CONTEXT.getApplicationContext();
     }
 
-    public static Disposable getDisposable() {
-        return (Disposable) disposable;
+    public static CompositeDisposable getDisposable() {
+        return (CompositeDisposable) disposable;
     }
 
     public static DatabaseNya getDatabase() {
@@ -29,5 +34,6 @@ public class MainApplication extends Application {
         super.onCreate();
         CONTEXT = getApplicationContext();
         mDatabase = DatabaseNya.getsObjectClassIni(CONTEXT);
+        dateFormat = new SimpleDateFormat(DATE_FORMAT);
     }
 }

@@ -11,15 +11,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jun.travelreminder.Databasenya.ROOM.AppExecutor;
 import com.example.jun.travelreminder.Databasenya.ROOM.ViewModel.itemviewmodel.LoadMainViewModel;
 import com.example.jun.travelreminder.Databasenya.ROOM.model_entity.item;
-import com.example.jun.travelreminder.MainApplication;
 import com.example.jun.travelreminder.R;
 import com.example.jun.travelreminder.base.BaseListAdapter;
 import com.example.jun.travelreminder.fitur.input.InputActivity;
@@ -32,7 +29,6 @@ public class OutputFragment extends Fragment implements OutputFragmentView, View
     private Context context;
     private RecyclerView rvInput;
     private OutputAdapter adapter;
-    //    private Date arrivalDate;
     private OutputFragmentPresenter presenter;
     private GridLayoutManager gridLayout;
     private LinearLayoutManager linearLayout;

@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.example.jun.travelreminder.MainActivity;
 import com.example.jun.travelreminder.R;
@@ -28,7 +27,6 @@ public class NotificationUtil {
     private static final int ACTION_IGNORE_PENDING_INTENT_ID = 14;
 
     public static void reminderNotif(Context context) {
-        Log.d(TAG, "notif-jalan");
         NotificationManager notif = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //khusus versi Oreo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -56,15 +54,14 @@ public class NotificationUtil {
     }
 
 
-    public static PendingIntent contentIntent(Context context) {
+    private static PendingIntent contentIntent(Context context) {
         Intent i = new Intent(context, MainActivity.class);
         return PendingIntent.getActivity(context, PENDING_INTENT_ID, i, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    public static Bitmap largeIcon(Context context) {
+    private static Bitmap largeIcon(Context context) {
         Resources res = context.getResources();
-        Bitmap largeIcons = BitmapFactory.decodeResource(res, R.drawable.squirrel_icon);
-        return largeIcons;
+        return BitmapFactory.decodeResource(res, R.drawable.squirrel_icon);
     }
 
     public static void clearAllNotification(Context context) {
@@ -76,10 +73,8 @@ public class NotificationUtil {
         Intent i = new Intent(context, ReminderServices.class);
         i.setAction(ReminderTasks.ACTION_DISMISS_NOTIFICATION);
         PendingIntent pendingIntent = PendingIntent.getService(context, ACTION_IGNORE_PENDING_INTENT_ID, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Action ignoreNotification =
-                new NotificationCompat.Action(R.drawable.ic_cancel_black_24dp,
-                        "No, Thanks !", pendingIntent);
-        return ignoreNotification;
+        return new NotificationCompat.Action(R.drawable.ic_cancel_black_24dp,
+                "No, Thanks !", pendingIntent);
     }
 
 }

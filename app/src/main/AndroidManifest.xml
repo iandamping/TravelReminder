@@ -34,7 +34,7 @@
         <service
             android:name=".helper.services.ReminderServices"
             android:exported="false" />
-        <!--<service android:name=".helper.SyncHelper.WeatherIntentService" android:exported="false"/>-->
+
         <service
             android:name=".helper.Notification.NotificationJobService"
             android:exported="false">
@@ -42,21 +42,8 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
         </service>
-        <!--<service-->
-        <!--android:name=".helper.DateChecker.FirebaseDateChecker"-->
-        <!--android:exported="false">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>-->
-        <!--</intent-filter>-->
-        <!--</service>-->
+        <receiver android:name=".helper.alarm.AlarmReceiver"/>
 
-        <!--<service-->
-        <!--android:name=".helper.SyncHelper.FirebaseWeatherSync"-->
-        <!--android:exported="false">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>-->
-        <!--</intent-filter>-->
-        <!--</service>-->
     </application>
 
 </manifest>

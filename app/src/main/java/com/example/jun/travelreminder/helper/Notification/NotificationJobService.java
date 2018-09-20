@@ -1,5 +1,6 @@
 package com.example.jun.travelreminder.helper.Notification;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -10,7 +11,7 @@ import com.firebase.jobdispatcher.JobService;
 public class NotificationJobService extends JobService {
     private AsyncTask mBackgroundTask;
 
-
+    @SuppressLint("StaticFieldLeak")
     @Override
     public boolean onStartJob(final JobParameters job) {
         mBackgroundTask = new AsyncTask() {
@@ -18,11 +19,10 @@ public class NotificationJobService extends JobService {
             protected Object doInBackground(Object[] objects) {
                 Context context = getApplicationContext();
                 DateChecker.dailyCheck(context);
-                if (DateChecker.status == true) {
-                    ReminderTasks.executeTask(context, ReminderTasks.ACTION_REMINDER_NOTIF);
-                }
+//                if (DateChecker.status == true) {
+//                    ReminderTasks.executeTask(context, ReminderTasks.ACTION_REMINDER_NOTIF);
+//                }
 
-//                DateCheckerUtil.scheduleDateCheck(context);
                 return null;
             }
 

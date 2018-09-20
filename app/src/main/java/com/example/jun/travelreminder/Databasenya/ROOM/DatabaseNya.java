@@ -7,14 +7,12 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.jun.travelreminder.Databasenya.ROOM.DAOs.DAO_date;
 import com.example.jun.travelreminder.Databasenya.ROOM.DAOs.DAO_news;
 import com.example.jun.travelreminder.Databasenya.ROOM.DAOs.DAO_roomnya;
-import com.example.jun.travelreminder.Databasenya.ROOM.model_entity.DateUsers;
 import com.example.jun.travelreminder.Databasenya.ROOM.model_entity.item;
 import com.example.jun.travelreminder.model.news.Article;
 
-@Database(entities = {item.class, DateUsers.class, Article.class}, version = 1, exportSchema = false)
+@Database(entities = {item.class, Article.class}, version = 1, exportSchema = false)
 @TypeConverters({list_converter.class})
 public abstract class DatabaseNya extends RoomDatabase {
     private static final String LOG_TAG = DatabaseNya.class.getSimpleName();
@@ -35,9 +33,8 @@ public abstract class DatabaseNya extends RoomDatabase {
         return sObjectClassIni;
     }
 
-    public abstract DAO_roomnya dao_item();
-
-    public abstract DAO_date dao_date();
+    public abstract DAO_roomnya dao_travelItem();
 
     public abstract DAO_news dao_news();
+
 }

@@ -34,7 +34,7 @@
                     android:textSize="@dimen/letter_small" />
 
                 <TextView
-                    android:id="@+id/tvDate"
+                    android:id="@+id/tvItems"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Selasa, 4 Juli 2015"
@@ -81,5 +81,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/lightPrimary" />
+        android:background="@color/dc_lightestgray" />
 </LinearLayout>

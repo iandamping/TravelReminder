@@ -28,7 +28,7 @@ public interface DAO_news {
     void insertDataNews(List<Article> insert);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateDataNews(Article update);
+    void updateDataNews(List<Article> update);
 
     @Delete
     void deleteDataNews(Article insert);

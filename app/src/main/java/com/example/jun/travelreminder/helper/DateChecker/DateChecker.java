@@ -1,66 +1,65 @@
 package com.example.jun.travelreminder.helper.DateChecker;
 
-import android.arch.lifecycle.LiveData;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 
-import com.example.jun.travelreminder.Databasenya.ROOM.AppExecutor;
-import com.example.jun.travelreminder.Databasenya.ROOM.model_entity.DateUsers;
+import com.example.jun.travelreminder.Databasenya.ROOM.model_entity.item;
 import com.example.jun.travelreminder.MainApplication;
-import com.example.jun.travelreminder.helper.Notification.NotificationUtil;
-import com.example.jun.travelreminder.helper.Notification.ReminderTasks;
+import com.example.jun.travelreminder.helper.alarm.AlarmReceiver;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static android.content.Context.ALARM_SERVICE;
+
 public class DateChecker {
-    private static final String TAG = DateChecker.class.getName();
-    private static final String DATE_FORMAT = "dd/MM/yyy";
-    public static boolean status = false;
-    private static List<DateUsers> testing;
-    private static Date dateDatabase = new Date();
-    private static DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    private static Calendar calendar = Calendar.getInstance();
+    private static AlarmManager am;
+    private static PendingIntent pi;
     private static String databaseDate = "";
-    private static String currentDate = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(new Date());
+    private static String currentDate = new SimpleDateFormat(MainApplication.DATE_FORMAT, Locale.getDefault()).format(new Date());
+
 
     public static void dailyCheck(final Context context) {
-        testing = new ArrayList<>();
-        AppExecutor.getsInstance().getDiskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                testing = MainApplication.getDatabase().dao_date().load_all_date_test();
-                for (int i = 0; i < testing.size(); i++) {
-                    dateDatabase = testing.get(i).getArrivaldate();
-                    databaseDate = dateFormat.format(dateDatabase);
-                    if (databaseDate.equalsIgnoreCase(currentDate)) {
-                        status = true;
-                        Log.d(TAG, status + "--> ini statusnya");
-                        //todo hanya mengambil status TRUE / FALSE saja
-//                        NotificationUtil.reminderNotif(context);
-//                        ReminderTasks.executeTask(context, ReminderTasks.ACTION_REMINDER_NOTIF);
+        MainApplication.getDisposable().add(MainApplication.getDatabase().dao_travelItem().loadFlowabale()
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(results -> Observable.fromIterable(results).subscribe(new DisposableObserver<item>() {
+                    @Override
+                    public void onNext(item dateUsers) {
+                        databaseDate = MainApplication.dateFormat.format(dateUsers.getArrivaldate());
+                        if (databaseDate.equalsIgnoreCase(currentDate)) {
+                            calendar.set(Calendar.HOUR_OF_DAY, dateUsers.getSelectedHour());
+                            calendar.set(Calendar.MINUTE, dateUsers.getSelectedMin());
+                        }
                     }
-                }
-            }
-        });
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Intent i = new Intent(context, AlarmReceiver.class);
+                        pi = PendingIntent.getBroadcast(context.getApplicationContext(), 0, i, FLAG_CANCEL_CURRENT);
+                        am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 0, pi);
+                    }
+                })));
+
     }
 }
 
-//        LiveData<List<DateUsers>> date_user = mDb.dao_date().load_all_date();
-//        date_user.observe((LifecycleOwner) DateChecker.this, new Observer<List<DateUsers>>() {
-//            @Override
-//            public void onChanged(@Nullable List<DateUsers> dateUsers) {
-//                for (DateUsers dates : dateUsers){
-//                    dateDatabase = dates.getArrivaldate();
-//                    databaseDate = dateFormat.format(dateDatabase);
-//                    if (databaseDate.equalsIgnoreCase(currentDate)){
-//                        status = true;
-//                    }else return;
-//                }
-//            }
-//        });
-//    }
+
 

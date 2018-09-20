@@ -44,10 +44,10 @@ public class NewsFragmentAdapter extends BaseListAdapter<Article, NewsFragmentAd
         TextView tvAuthor, tvDate, tvTitle, tvDesc;
         ImageView ivImage;
 
-        public ViewHolder(View itemView, OnItemClickListener onItemClickListener) {
+        private ViewHolder(View itemView, OnItemClickListener onItemClickListener) {
             super(itemView, onItemClickListener);
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
-            tvDate = itemView.findViewById(R.id.tvDate);
+            tvDate = itemView.findViewById(R.id.tvItems);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDesc = itemView.findViewById(R.id.tvDesc);
             ivImage = itemView.findViewById(R.id.ivImage);

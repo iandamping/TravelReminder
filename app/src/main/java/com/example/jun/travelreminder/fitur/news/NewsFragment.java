@@ -1,6 +1,5 @@
 package com.example.jun.travelreminder.fitur.news;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,14 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jun.travelreminder.Databasenya.ROOM.DatabaseNya;
 import com.example.jun.travelreminder.Databasenya.ROOM.ViewModel.newsviewmodel.LoadAllDataNews;
-import com.example.jun.travelreminder.MainApplication;
 import com.example.jun.travelreminder.R;
 import com.example.jun.travelreminder.model.news.Article;
 import com.example.jun.travelreminder.network.RequestObserver;
-
-import java.util.List;
 
 public class NewsFragment extends Fragment implements NewsFragmentView, NewsFragmentOnClickListener {
     NewsFragmentPresenter presenter;
@@ -28,7 +23,6 @@ public class NewsFragment extends Fragment implements NewsFragmentView, NewsFrag
     Context context;
     private RecyclerView rvNews;
     private LinearLayoutManager linearLayout;
-    private DatabaseNya mDb;
 
 
     public static NewsFragment newInstance() {
@@ -51,11 +45,9 @@ public class NewsFragment extends Fragment implements NewsFragmentView, NewsFrag
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-        mDb = DatabaseNya.getsObjectClassIni(MainApplication.CONTEXT);
         presenter = new NewsFragmentPresenter(this);
         presenter.onAttach(context);
         adapter = new NewsFragmentAdapter(context);
-
         presenter.getData(RequestObserver.HAS_PULL);
 
 
@@ -75,13 +67,7 @@ public class NewsFragment extends Fragment implements NewsFragmentView, NewsFrag
 //        presenter.getData(state);
 
         LoadAllDataNews views = ViewModelProviders.of(getActivity()).get(LoadAllDataNews.class);
-        views.getListLiveData().observe(this, new Observer<List<Article>>() {
-            @Override
-            public void onChanged(@Nullable List<Article> articles) {
-
-                adapter.setTask(articles);
-            }
-        });
+        views.getListLiveData().observe(this, articles -> adapter.setTask(articles));
 
         linearLayout = new LinearLayoutManager(context);
         rvNews.setLayoutManager(linearLayout);

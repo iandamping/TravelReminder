@@ -72,6 +72,20 @@
 
     </LinearLayout>
 
+    <RadioButton
+        android:id="@+id/rbTimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        android:text="Want to get Notification when arrive ?"/>
+
+    <EditText
+        android:id="@+id/etHours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginRight="@dimen/spacing_medium" />
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.example.jun.travelreminder.Databasenya.ROOM.DatabaseNya;
 import com.example.jun.travelreminder.MainApplication;
 import com.example.jun.travelreminder.model.news.Article;
 
@@ -17,8 +16,7 @@ public class LoadAllDataNews extends AndroidViewModel {
 
     public LoadAllDataNews(@NonNull Application application) {
         super(application);
-        DatabaseNya mDb = DatabaseNya.getsObjectClassIni(MainApplication.CONTEXT);
-        listLiveData = mDb.dao_news().load_all_news();
+        listLiveData = MainApplication.getDatabase().dao_news().load_all_news();
     }
 
 

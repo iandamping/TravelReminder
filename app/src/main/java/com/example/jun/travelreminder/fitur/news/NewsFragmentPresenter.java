@@ -43,7 +43,7 @@ public class NewsFragmentPresenter implements BaseFragmentPresenter {
     }
 
     public void getData(String action) {
-        RequestObserver.getUser(action, ApiKey.ApiSource, ApiKey.ApiKeyNews);
+        RequestObserver.getBBCNews(action, ApiKey.ApiSource, ApiKey.ApiKeyNews);
 
     }
 

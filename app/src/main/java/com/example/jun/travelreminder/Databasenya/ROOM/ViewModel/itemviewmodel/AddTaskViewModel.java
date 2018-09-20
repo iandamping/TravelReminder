@@ -10,7 +10,7 @@ public class AddTaskViewModel extends ViewModel {
     private LiveData<item> addTask;
 
     public AddTaskViewModel(DatabaseNya db, int taskId) {
-        addTask = db.dao_item().loadAllById(taskId);
+        addTask = db.dao_travelItem().loadAllById(taskId);
     }
 
     public LiveData<item> getAddTask() {

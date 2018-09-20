@@ -13,16 +13,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
 import com.example.jun.travelreminder.fitur.news.NewsFragment;
 import com.example.jun.travelreminder.fitur.output.OutputFragment;
-import com.example.jun.travelreminder.fitur.weather.WeatherFragment;
-import com.example.jun.travelreminder.helper.Notification.ReminderUtil;
 import com.example.jun.travelreminder.helper.PreferenceHelper;
 import com.example.jun.travelreminder.network.RequestObserver;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class MainActivity extends AppCompatActivity {
     PreferenceHelper pref;
@@ -36,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    fragment = WeatherFragment.newInstance(condition);
-                    break;
+//                case R.id.navigation_home:
+//                    fragment = WeatherFragment.newInstance(condition);
+//                    break;
                 case R.id.navigation_input:
 //                    InputActivity.start(MainActivity.this);
                     fragment = OutputFragment.newInstance();
@@ -46,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_news:
                     fragment = NewsFragment.newInstance();
                     break;
+//                case R.id.navigation_blog:
+//                    fragment = BlogFragment.newInstance();
+//                    break;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.flContent, fragment).commit();
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null) {
             states = savedInstanceState.getString("states");
-            Log.d("RESTOREDSTATE", states + "restoredstates");
         }
     }
 
@@ -82,26 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pref = new PreferenceHelper(this);
         condition = pref.getInt("fragment");
-        //reminder ini yg dipakai
-//        ReminderUtil.scheduleNotifReminder(this);
-
-
-//        WeatherSyncUtil.scheduleWeatherSync(this);
-//        if (DateChecker.status){
-//          ReminderUtil.scheduleNotifReminder(this);
-//        }
-
         initBottomNav();
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        if (BuildConfig.DEBUG) {
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        }
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addNetworkInterceptor(interceptor)
-                .build();
-
-        AndroidNetworking.initialize(getApplicationContext(), okHttpClient);
 
     }
 
@@ -110,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.flContent, WeatherFragment.newInstance(condition))
+        getSupportFragmentManager().beginTransaction().replace(R.id.flContent, OutputFragment.newInstance())
                 .commit();
     }
 

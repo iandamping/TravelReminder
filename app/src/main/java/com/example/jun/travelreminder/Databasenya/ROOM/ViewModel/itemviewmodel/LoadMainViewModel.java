@@ -17,7 +17,7 @@ public class LoadMainViewModel extends AndroidViewModel {
     public LoadMainViewModel(@NonNull Application application) {
         super(application);
         DatabaseNya data = DatabaseNya.getsObjectClassIni(this.getApplication());
-        tasks = data.dao_item().loadAllData();
+        tasks = data.dao_travelItem().loadAllData();
 
         //load semua barang datanya sudah bukan ListData lagi tapi LiveData
     }

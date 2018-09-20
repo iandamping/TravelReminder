@@ -33,8 +33,8 @@ public class ApiClientBaru {
         return getClient(ApiConfig.NEWS_BASE_URL).create(ApiInterface.class);
     }
 
-    public static ApiInterface createBola() {
-        return getClient(ApiConfig.BOLA_URL).create(ApiInterface.class);
+    public static ApiInterface createRequestBlog() {
+        return getClient(ApiConfig.BLOG_URL).create(ApiInterface.class);
     }
 
     private static Retrofit getClient(String baseUrl) {
@@ -59,8 +59,8 @@ public class ApiClientBaru {
         OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
                 .cache(cache)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .dispatcher(dispatcher);
 
         okHttpBuilder.addInterceptor(new Interceptor() {
